@@ -6,6 +6,8 @@ include_once("db_conn.php");
 $user_id = $_POST["user_id"];
 $password = $_POST["password"];
 
+$_SESSION["user_id"] = $user_id;
+
 $login_query = mysqli_real_escape_string($conn, "SELECT UserLibraryID FROM User WHERE UserLibraryID=$user_id;");
 $result = mysqli_query($conn, $login_query);
 

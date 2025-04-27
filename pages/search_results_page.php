@@ -67,7 +67,7 @@ $books = mysqli_query($conn, $books_query)->fetch_all();
         <li>Location ID: <?= htmlspecialchars($book[4]) ?></li>
         <li>ISBN: <?= htmlspecialchars($book[5]) ?></li>
       </ul>
-      <a href="checkout_page.php?id=<?= urlencode($book[0])?>">
+      <a href="../handlers/user_actions/handle_checkout.php?id=<?= urlencode($book[0])?>">
       <button>Checkout</button>
       </a>
     </article>

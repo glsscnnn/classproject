@@ -11,25 +11,23 @@ School project or smth.
 
 - [x] Add an `sql` directory containing data for initial tables
 - [x] Migrate to pico
-- [x] Sign in page
-- [x] Sign up page
-- [x] Catalog page (high prio)
+- [x] Sign in page (both)
+- [x] Sign up page (both)
+- [x] Catalog page
     - [x] Patron catalog view
     - [x] Staff catalog view
-- [ ] Update users page
-- [ ] Update fines page
-- [ ] Update books page (in-progress)
-- [ ] Checkout books page (in-progress)
-- [ ] Pay fines page
-- [ ] Handle sign up user (in-progress)
-- [x] Handle login user
+- [x] Fines page (user)
+- [ ] Handle user fines (user) (in-progress)
+- [ ] Handle checkout (user) (in-progress)
+- [ ] Update users page (admin)
 - [ ] Handle update users (admin)
-- [ ] Handle update books (admin)
-- [ ] Handle update fines (admin)
-- [ ] Handle user fines (user)
-- [ ] Handle checkout (user)
-- [ ] Security Tests Page
-- [ ] Testing*
-
-* Just nice to have, low prio don't have time to make good software
-
+- [x] Update fines page (admin)
+- [x] Add fines form (admin)
+- [x] Update books page (admin)
+- [x] Handle update books (admin)
+- [x] Handle update fines (admin)
+- [x] Handle add fines (admin)
+- [x] Search result page (both)
+- [x] Handle sign up user (both)
+- [x] Handle login user (both)
+- [ ] Injection Tests Page (use prepared statements and real escape)
