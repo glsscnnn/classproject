@@ -17,10 +17,11 @@ School project or smth.
     - [x] Patron catalog view
     - [x] Staff catalog view
 - [x] Fines page (user)
-- [ ] Handle user fines (user) (in-progress)
-- [ ] Handle checkout (user) (in-progress)
-- [ ] Update users page (admin)
-- [ ] Handle update users (admin)
+- [x] Handle user fines (user)
+- [x] Handle checkout (user)
+- [x] Handle checkin (user)
+- [x] Update users page (admin)
+- [x] Handle update users (admin)
 - [x] Update fines page (admin)
 - [x] Add fines form (admin)
 - [x] Update books page (admin)

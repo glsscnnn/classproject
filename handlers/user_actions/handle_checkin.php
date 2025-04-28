@@ -2,14 +2,13 @@
 session_start();
 include_once("../db_conn.php");
 
-// what do we need to do to check out a book?
-$checkout_id = rand(1, 20000);
 $user_id = $_SESSION["user_id"];
 $book_id = $_POST["book_id"];
 
 // execute statement
-$stmt = mysqli_real_escape_string($conn, "INSERT INTO Checkouts VALUES ($checkout_id, $user_id, $book_id, CURDATE(), CURDATE(), CURDATE())");
-mysqli_query($conn, $stmt);
+$stmt = $conn->prepare("DELETE FROM Checkouts WHERE UserLibraryID = ? AND BookID = ?");
+$stmt->bind_param("ii", $user_id, $book_id);
+$stmt->execute();
 
 // redirect back to where we came from
 header("Location: ../../pages/search_results_page.php");

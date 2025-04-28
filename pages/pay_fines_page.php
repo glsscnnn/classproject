@@ -23,11 +23,12 @@ $fines = mysqli_query($conn, $get_assoc_fines_query)->fetch_all();
         <strong>Book ID </strong><?= htmlspecialchars($fine[2]); ?>
         <form action="../handlers/user_actions/handle_user_fines.php" method="POST">
           <fieldset>
+            <input type="hidden" name="fine_id" value="<?= htmlspecialchars($fine[0]); ?>"/>
             <label>
-              Pay Amount ($)
+              Pay to Amount ($)
               <input
                name="amount"
-               placeholder="<?= htmlspecialchars($fine[3]); ?>"
+               value="<?= htmlspecialchars($fine[3]); ?>"
               />
             </label>
             <button type="submit">Submit</button>

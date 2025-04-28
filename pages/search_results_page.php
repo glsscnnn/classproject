@@ -2,18 +2,27 @@
 session_start();
 include_once("../handlers/db_conn.php");
 $user_type = $_SESSION["user_type"];
+$user_id = $_SESSION["user_id"];
 
 if ($user_type == null) {
   header("Location: ../index.php");
   exit();
 }
 
-// Retreive books from the database
+// Retrieve books from the database
 $books_query = mysqli_real_escape_string($conn, "SELECT * FROM Book;");
 $books = mysqli_query($conn, $books_query)->fetch_all();
 
+// get all checked out books
+$checked_out_query = mysqli_real_escape_string($conn, "SELECT BookID FROM Checkouts");
+$checked_out = mysqli_query($conn, $checked_out_query)->fetch_all();
+
+// get all owned books
+$owned_query = mysqli_real_escape_string($conn, "SELECT BookID FROM Checkouts WHERE UserLibraryID = $user_id");
+$owned = mysqli_query($conn, $owned_query)->fetch_all();
+
 /**
- * Indicies:
+ * Indices:
  * 0 = id
  * 1 = title
  * 2 = author
@@ -35,6 +44,7 @@ $books = mysqli_query($conn, $books_query)->fetch_all();
 </style>
 </head>
 <body>
+<!--STAFF VIEW-->
 <?php if ($user_type == "admin"): ?>
   <div class="container">
     <h1>Library Application</h1>
@@ -54,6 +64,8 @@ $books = mysqli_query($conn, $books_query)->fetch_all();
     </article>
     <?php endforeach; ?>
   </div>
+
+<!--PATRON VIEW-->
 <?php else: ?>
   <div class="container">
     <h1>Library Application</h1>
@@ -67,9 +79,21 @@ $books = mysqli_query($conn, $books_query)->fetch_all();
         <li>Location ID: <?= htmlspecialchars($book[4]) ?></li>
         <li>ISBN: <?= htmlspecialchars($book[5]) ?></li>
       </ul>
-      <a href="../handlers/user_actions/handle_checkout.php?id=<?= urlencode($book[0])?>">
-      <button>Checkout</button>
-      </a>
+
+      <!--CHECKOUT BUTTON-->
+      <?php if (!in_array($book[0], array_column($checked_out, 0))): ?>
+        <form action="../handlers/user_actions/handle_checkout.php" method="POST">
+          <input type="hidden" name="book_id" value="<?= htmlspecialchars($book[0]); ?>"/>
+          <button>Checkout</button>
+        </form>
+      <?php elseif (in_array($book[0], array_column($owned, 0))): ?>
+        <form action="../handlers/user_actions/handle_checkin.php" method="POST">
+          <input type="hidden" name="book_id" value="<?= htmlspecialchars($book[0]); ?>"/>
+          <button>Check-In</button>
+        </form>
+      <?php else: ?>
+        <button disabled>Checkout</button>
+      <?php endif; ?>
     </article>
     <?php endforeach; ?>
   </div>
